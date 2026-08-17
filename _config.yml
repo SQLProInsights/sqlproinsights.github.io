@@ -1,0 +1,16 @@
+title: SQL Pro Insights
+description: Practical Technology. Real-World Solutions.
+url: "https://sqlproinsights.github.io"
+
+author:
+  name: SQL Pro Insights
+
+theme: minima
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+markdown: kramdown
+
+permalink: /blog/:title/
