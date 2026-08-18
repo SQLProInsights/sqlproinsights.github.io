@@ -266,59 +266,26 @@
 
         <div class="articles">
 
-            <div class="card">
-
-                <h3>
-                    SQL Server Performance Tuning
-                </h3>
-
-                <p>
-                    Learn practical techniques for identifying and resolving
-                    SQL Server performance problems.
-                </p>
-
-                <span class="read-more">
-                    Coming Soon
-                </span>
-
-            </div>
-
-
-            <div class="card">
-
-                <h3>
-                    SQL Server Migration
-                </h3>
-
-                <p>
-                    A practical approach to migrating SQL Server databases
-                    between versions and environments.
-                </p>
-
-                <a href="/blog/sql-server-2016-to-2025-migration/" class="read-more">
-                    Read Article →
-                </a>
-
-            </div>
-
-
-            <div class="card">
-
-                <h3>
-                    AI for Database Professionals
-                </h3>
-
-                <p>
-                    Explore practical ways database professionals can use
-                    AI to automate tasks and improve productivity.
-                </p>
-
-                <span class="read-more">
-    Coming Soon
-</span>
-
-            </div>
-
+            {% for post in site.posts limit:3 %}
+        
+                <div class="card">
+        
+                    <h3>
+                        {{ post.title }}
+                    </h3>
+        
+                    <p>
+                        {{ post.excerpt | strip_html | truncatewords: 25 }}
+                    </p>
+        
+                    <a href="{{ post.url | relative_url }}" class="read-more">
+                        Read Article →
+                    </a>
+        
+                </div>
+        
+            {% endfor %}
+        
         </div>
 
     </main>
