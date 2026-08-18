@@ -11,8 +11,6 @@ tags:
   - AI
 ---
 
-# Welcome to SQL Pro Insights
-
 Welcome to **SQL Pro Insights**.
 
 This blog is focused on practical technology, real-world solutions, and lessons learned from working with databases and enterprise technology.
