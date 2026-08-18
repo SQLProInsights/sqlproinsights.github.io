@@ -57,14 +57,16 @@ SELECT
     name,
     compatibility_level
 FROM sys.databases;
+```
 
 Do not automatically change the database compatibility level immediately after migration.
 
 Keeping the existing compatibility level initially can reduce application risk while you validate the database on the new SQL Server version.
 
-4. Perform a Full Database Backup
+## 4. Perform a Full Database Backup
 
 Before migration, take a verified full backup.
+```sql
 BACKUP DATABASE [YourDatabase]
 TO DISK = 'D:\Backup\YourDatabase.bak'
 WITH
@@ -75,13 +77,15 @@ You should also verify the backup:
 RESTORE VERIFYONLY
 FROM DISK = 'D:\Backup\YourDatabase.bak'
 WITH CHECKSUM;
+```
 
-5. Restore the Database on SQL Server 2025
+## 5. Restore the Database on SQL Server 2025
 
 Copy the backup to the target SQL Server and restore it.
 
 First determine the logical file names if necessary:
 
+```sql
 RESTORE FILELISTONLY
 FROM DISK = 'D:\Backup\YourDatabase.bak';
 
@@ -95,11 +99,13 @@ WITH
         TO 'D:\SQLLogs\YourDatabase_log.ldf',
     RECOVERY,
     CHECKSUM;
+```
 Adjust the logical file names and destination paths for your environment.
 
-6. Validate the Restored Database
+## 6. Validate the Restored Database
 
 Check the database state:
+```sql
 SELECT
     name,
     state_desc,
@@ -107,21 +113,23 @@ SELECT
     compatibility_level
 FROM sys.databases
 WHERE name = 'YourDatabase';
-
+```
 The database should normally show:
+```sql
 ONLINE
-
+```
 before application testing begins.
 
-7. Run DBCC CHECKDB
+## 7. Run DBCC CHECKDB
 
 Run an integrity check against the restored database:
+```sql
 DBCC CHECKDB ('YourDatabase')
 WITH NO_INFOMSGS;
-
+```
 Investigate any consistency errors before proceeding with the production cutover.
 
-8. Review Logins and Permissions
+## 8. Review Logins and Permissions
 
 Database users are stored inside the database, while SQL Server logins are server-level objects.
 
@@ -139,7 +147,7 @@ Application service accounts
 
 Also check for orphaned users where applicable.
 
-9. Review SQL Server Agent Jobs
+## 9. Review SQL Server Agent Jobs
 
 SQL Server Agent jobs are not contained in a normal user-database backup.
 
@@ -156,7 +164,7 @@ Cleanup jobs
 
 Also verify job owners, schedules, proxies, credentials, and notification settings.
 
-10. Validate Server-Level Dependencies
+## 10. Validate Server-Level Dependencies
 
 Check other components that may need to be recreated or migrated:
 
@@ -174,7 +182,7 @@ Custom server configuration
 
 A successful database restore does not guarantee that all application dependencies have been migrated.
 
-11. Test Application Connectivity
+## 11. Test Application Connectivity
 
 Before production cutover, test the application against the new SQL Server environment.
 
@@ -188,7 +196,8 @@ Reports
 Scheduled processes
 ETL processes
 Application functionality
-12. Establish a Performance Baseline
+
+## 12. Establish a Performance Baseline
 
 Compare important workloads between the old and new environments.
 
@@ -205,7 +214,7 @@ TempDB usage
 
 Having a baseline from the SQL Server 2016 environment makes post-migration troubleshooting much easier.
 
-13. Review Statistics and Query Plans
+## 13. Review Statistics and Query Plans
 
 After migration, monitor query performance carefully.
 
@@ -215,7 +224,7 @@ Do not immediately perform every possible maintenance operation simply because t
 
 Instead, identify actual performance problems and validate changes before applying them broadly.
 
-14. Test Before Changing Compatibility Level
+## 14. Test Before Changing Compatibility Level
 
 Once the application is stable on SQL Server 2025, test the newer database compatibility level in a non-production environment.
 
@@ -229,7 +238,7 @@ Application behavior
 
 Only change the production compatibility level after appropriate testing.
 
-15. Production Cutover
+## 15. Production Cutover
 
 Once testing is complete, schedule the production migration window.
 
@@ -246,7 +255,8 @@ Redirect the application to the new server.
 Start application services.
 Perform application validation.
 Monitor SQL Server closely.
-16. Post-Migration Monitoring
+
+## 16. Post-Migration Monitoring
 
 After cutover, monitor the environment carefully.
 
