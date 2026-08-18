@@ -73,7 +73,10 @@ WITH
     INIT,
     COMPRESSION,
     CHECKSUM;
+```
 You should also verify the backup:
+
+```sql
 RESTORE VERIFYONLY
 FROM DISK = 'D:\Backup\YourDatabase.bak'
 WITH CHECKSUM;
