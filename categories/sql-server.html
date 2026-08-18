@@ -1,0 +1,53 @@
+---
+layout: default
+title: SQL Server
+---
+
+<div class="blog-container">
+
+    <h1>SQL Server Articles</h1>
+
+    <p class="blog-intro">
+        Practical SQL Server administration, migration, performance, and troubleshooting articles.
+    </p>
+
+    {% assign sql_posts = site.categories["SQL Server"] %}
+
+    {% if sql_posts %}
+
+        {% for post in sql_posts %}
+
+            <article class="post-card">
+
+                <h2>
+                    <a href="{{ post.url | relative_url }}">
+                        {{ post.title }}
+                    </a>
+                </h2>
+
+                <div class="post-meta">
+                    {{ post.date | date: "%B %d, %Y" }}
+                </div>
+
+                {% if post.excerpt %}
+                    <p>
+                        {{ post.excerpt | strip_html | truncatewords: 35 }}
+                    </p>
+                {% endif %}
+
+                <a class="read-more"
+                   href="{{ post.url | relative_url }}">
+                    Read Article →
+                </a>
+
+            </article>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No SQL Server articles published yet.</p>
+
+    {% endif %}
+
+</div>
