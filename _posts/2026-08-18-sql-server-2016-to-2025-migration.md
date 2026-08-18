@@ -93,8 +93,11 @@ First determine the logical file names if necessary:
 ```sql
 RESTORE FILELISTONLY
 FROM DISK = 'D:\Backup\YourDatabase.bak';
+```
 
 Then restore the database:
+
+```sql
 RESTORE DATABASE [YourDatabase]
 FROM DISK = 'D:\Backup\YourDatabase.bak'
 WITH
@@ -105,11 +108,13 @@ WITH
     RECOVERY,
     CHECKSUM;
 ```
+
 Adjust the logical file names and destination paths for your environment.
 
 ## 6. Validate the Restored Database
 
 Check the database state:
+
 ```sql
 SELECT
     name,
@@ -119,19 +124,18 @@ SELECT
 FROM sys.databases
 WHERE name = 'YourDatabase';
 ```
-The database should normally show:
-```sql
-ONLINE
-```
-before application testing begins.
+
+The database should normally show `ONLINE` before application testing begins.
 
 ## 7. Run DBCC CHECKDB
 
 Run an integrity check against the restored database:
+
 ```sql
 DBCC CHECKDB ('YourDatabase')
 WITH NO_INFOMSGS;
 ```
+
 Investigate any consistency errors before proceeding with the production cutover.
 
 ## 8. Review Logins and Permissions
@@ -142,13 +146,13 @@ Therefore, moving a database does not automatically migrate all SQL Server login
 
 Review:
 
-SQL logins
-Windows logins/groups
-Server roles
-Database roles
-User mappings
-Database ownership
-Application service accounts
+- SQL logins
+- Windows logins/groups
+- Server roles
+- Database roles
+- User mappings
+- Database ownership
+- Application service accounts
 
 Also check for orphaned users where applicable.
 
@@ -158,14 +162,14 @@ SQL Server Agent jobs are not contained in a normal user-database backup.
 
 Review and migrate jobs such as:
 
-Database backups
-Integrity checks
-Index maintenance
-Statistics maintenance
-ETL processes
-Monitoring jobs
-Application jobs
-Cleanup jobs
+- Database backups
+- Integrity checks
+- Index maintenance
+- Statistics maintenance
+- ETL processes
+- Monitoring jobs
+- Application jobs
+- Cleanup jobs
 
 Also verify job owners, schedules, proxies, credentials, and notification settings.
 
@@ -173,17 +177,17 @@ Also verify job owners, schedules, proxies, credentials, and notification settin
 
 Check other components that may need to be recreated or migrated:
 
-Linked servers
-Database Mail
-Credentials
-Proxies
-Server-level triggers
-Endpoints
-Certificates
-SSIS packages
-Operators
-Alerts
-Custom server configuration
+- Linked servers
+- Database Mail
+- Credentials
+- Proxies
+- Server-level triggers
+- Endpoints
+- Certificates
+- SSIS packages
+- Operators
+- Alerts
+- Custom server configuration
 
 A successful database restore does not guarantee that all application dependencies have been migrated.
 
@@ -193,14 +197,14 @@ Before production cutover, test the application against the new SQL Server envir
 
 Validate:
 
-Application connections
-Authentication
-Stored procedures
-Queries
-Reports
-Scheduled processes
-ETL processes
-Application functionality
+- Application connections
+- Authentication
+- Stored procedures
+- Queries
+- Reports
+- Scheduled processes
+- ETL processes
+- Application functionality
 
 ## 12. Establish a Performance Baseline
 
@@ -208,14 +212,14 @@ Compare important workloads between the old and new environments.
 
 Pay attention to:
 
-CPU utilization
-Memory usage
-Wait statistics
-Disk I/O
-Query duration
-Execution plans
-Blocking
-TempDB usage
+- CPU utilization
+- Memory usage
+- Wait statistics
+- Disk I/O
+- Query duration
+- Execution plans
+- Blocking
+- TempDB usage
 
 Having a baseline from the SQL Server 2016 environment makes post-migration troubleshooting much easier.
 
@@ -235,11 +239,11 @@ Once the application is stable on SQL Server 2025, test the newer database compa
 
 Use representative workloads and compare:
 
-Execution plans
-Query duration
-CPU consumption
-I/O
-Application behavior
+- Execution plans
+- Query duration
+- CPU consumption
+- I/O
+- Application behavior
 
 Only change the production compatibility level after appropriate testing.
 
@@ -249,17 +253,17 @@ Once testing is complete, schedule the production migration window.
 
 A typical sequence is:
 
-Stop or redirect application traffic.
-Confirm no unexpected application connections remain.
-Take the final backup.
-Transfer and restore the final database.
-Validate database integrity and state.
-Validate logins and permissions.
-Confirm SQL Server Agent jobs and dependencies.
-Redirect the application to the new server.
-Start application services.
-Perform application validation.
-Monitor SQL Server closely.
+1. Stop or redirect application traffic.
+2. Confirm no unexpected application connections remain.
+3. Take the final backup.
+4. Transfer and restore the final database.
+5. Validate database integrity and state.
+6. Validate logins and permissions.
+7. Confirm SQL Server Agent jobs and dependencies.
+8. Redirect the application to the new server.
+9. Start application services.
+10. Perform application validation.
+11. Monitor SQL Server closely.
 
 ## 16. Post-Migration Monitoring
 
@@ -267,22 +271,22 @@ After cutover, monitor the environment carefully.
 
 Check:
 
-SQL Server error log
-Failed SQL Agent jobs
-Application errors
-Blocking
-Deadlocks
-Wait statistics
-CPU and memory
-Disk latency
-Slow queries
-Backup jobs
+- SQL Server error log
+- Failed SQL Agent jobs
+- Application errors
+- Blocking
+- Deadlocks
+- Wait statistics
+- CPU and memory
+- Disk latency
+- Slow queries
+- Backup jobs
 
 Continue comparing performance against your pre-migration baseline.
 
-Final Thoughts
+## Final Thoughts
 
-A SQL Server migration should be treated as a controlled project, not simply a backup-and-restore operation.
+A SQL Server migration should be treated as a **controlled project**, not simply a backup-and-restore operation.
 
 The database itself is only one part of the SQL Server environment.
 
