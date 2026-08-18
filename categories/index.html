@@ -1,0 +1,59 @@
+---
+layout: default
+title: Categories
+permalink: /categories/
+---
+
+<div class="blog-container">
+
+    <h1>Browse by Category</h1>
+
+    <p class="blog-intro">
+        Explore SQL Pro Insights articles by topic.
+    </p>
+
+    {% assign sorted_categories = site.categories | sort %}
+
+    {% for category in sorted_categories %}
+
+        {% assign category_name = category[0] %}
+        {% assign category_posts = category[1] %}
+
+        <section id="{{ category_name | slugify }}" style="margin-bottom: 50px;">
+
+            <h2>
+                {{ category_name }}
+            </h2>
+
+            {% for post in category_posts %}
+
+                <article class="post-card">
+
+                    <h3>
+                        <a href="{{ post.url | relative_url }}">
+                            {{ post.title }}
+                        </a>
+                    </h3>
+
+                    <div class="post-meta">
+                        {{ post.date | date: "%B %d, %Y" }}
+                    </div>
+
+                    <p>
+                        {{ post.excerpt | strip_html | truncatewords: 30 }}
+                    </p>
+
+                    <a class="read-more"
+                       href="{{ post.url | relative_url }}">
+                        Read Article →
+                    </a>
+
+                </article>
+
+            {% endfor %}
+
+        </section>
+
+    {% endfor %}
+
+</div>
