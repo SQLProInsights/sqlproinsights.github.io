@@ -1,0 +1,55 @@
+---
+layout: default
+title: Blog
+---
+
+<div class="blog-container">
+
+    <h1>SQL Pro Insights Blog</h1>
+
+    <p class="blog-intro">
+        Practical guides, tutorials, and real-world technology solutions.
+    </p>
+
+    {% if site.posts.size > 0 %}
+
+        {% for post in site.posts %}
+
+            <article class="post-card">
+
+                <h2>
+                    <a href="{{ post.url | relative_url }}">
+                        {{ post.title }}
+                    </a>
+                </h2>
+
+                <div class="post-meta">
+                    {{ post.date | date: "%B %d, %Y" }}
+
+                    {% if post.categories %}
+                        · {{ post.categories | join: ", " }}
+                    {% endif %}
+                </div>
+
+                {% if post.excerpt %}
+                    <p>
+                        {{ post.excerpt | strip_html | truncatewords: 35 }}
+                    </p>
+                {% endif %}
+
+                <a class="read-more"
+                   href="{{ post.url | relative_url }}">
+                    Read Article →
+                </a>
+
+            </article>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No articles published yet.</p>
+
+    {% endif %}
+
+</div>
