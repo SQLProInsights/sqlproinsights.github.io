@@ -66,6 +66,7 @@ Keeping the existing compatibility level initially can reduce application risk w
 ## 4. Perform a Full Database Backup
 
 Before migration, take a verified full backup.
+
 ```sql
 BACKUP DATABASE [YourDatabase]
 TO DISK = 'D:\Backup\YourDatabase.bak'
@@ -74,6 +75,7 @@ WITH
     COMPRESSION,
     CHECKSUM;
 ```
+
 You should also verify the backup:
 
 ```sql
