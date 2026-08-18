@@ -1,32 +1,34 @@
 ---
 layout: post
-title: "Article Title Goes Here"
+title: "YOUR ARTICLE TITLE"
 date: YYYY-MM-DD
 categories:
   - SQL Server
 tags:
   - SQL Server
   - Database Administration
-description: "Short description of the article for search engines and previews."
+description: "Write a short 1-2 sentence description of the article."
 ---
 
-Write a short introduction explaining what the article covers and why it is useful.
+Write a short introduction explaining:
 
-## 1. First Section
+- What problem this article addresses
+- Why it matters
+- What the reader will learn
+
+## 1. First Main Section
 
 Explain the topic here.
 
-You can use **bold text** for important terms.
+Use **bold text** when something is particularly important.
 
-You can also use lists:
+### Optional Subsection
 
-- First item
-- Second item
-- Third item
+Use a subsection when a main section needs to be divided into smaller topics.
 
 ## 2. SQL Example
 
-Explain what the following query does.
+Explain what you're about to run and why.
 
 ```sql
 SELECT
@@ -37,31 +39,50 @@ FROM sys.databases
 ORDER BY name;
 ```
 
-Explain the result underneath the SQL block.
+Explain what the output means and what the reader should look for.
 
-## 3. Another Section
+> **Important:** Use notes like this for warnings, prerequisites, or important considerations.
 
-Continue the article here.
+## 3. Step-by-Step Procedure
 
-### Optional Subheading
+Use numbered lists for procedures:
 
-Use `###` when you need a subsection inside a main section.
+1. Complete the first step.
+2. Validate the result.
+3. Complete the next step.
+4. Test the change.
+5. Document the result.
 
-For example:
+## 4. Things to Check
+
+Use bullets for checklists or groups of related items:
+
+- SQL Server version
+- Database compatibility level
+- Database status
+- SQL Server Agent jobs
+- Application connectivity
+- Error logs
+
+## 5. Another SQL Example
 
 ```sql
 SELECT @@VERSION;
 ```
 
-## Important Considerations
+Explain the result underneath the code.
 
-Use bullet points when appropriate:
+## Best Practices
 
-- Test changes before production.
-- Take backups before major changes.
-- Document the existing environment.
+- Test changes outside production first.
+- Take appropriate backups.
+- Document the existing configuration.
+- Have a rollback plan.
 - Validate application dependencies.
+- Monitor after making changes.
 
 ## Final Thoughts
 
-Summarize the article and the main recommendation.
+Summarize the problem, solution, and most important recommendation.
+
+Explain what the reader should consider doing next.
