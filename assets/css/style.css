@@ -89,18 +89,29 @@ main {
 }
 
 .post code {
+    font-family: Consolas, "Courier New", monospace;
     background: #f3f4f6;
     padding: 3px 6px;
     border-radius: 4px;
+    font-size: 0.95em;
 }
 
 .post pre {
     background: #111827;
-    color: white;
-    padding: 20px;
+    color: #f9fafb;
+    padding: 22px;
     overflow-x: auto;
-    border-radius: 6px;
-    margin: 20px 0;
+    border-radius: 8px;
+    margin: 22px 0;
+    line-height: 1.6;
+}
+
+.post pre code {
+    background: transparent;
+    padding: 0;
+    color: inherit;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 14px;
 }
 
 .post-meta {
