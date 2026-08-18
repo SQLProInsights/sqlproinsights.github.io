@@ -4,20 +4,15 @@ layout: default
 
 <article class="post">
 
-    <h1>
-        {{ page.title }}
-    </h1>
+    <h1>{{ page.title }}</h1>
 
     <div class="post-meta">
-
         Published:
         {{ page.date | date: "%B %d, %Y" }}
 
         {% if page.categories %}
-            ·
-            {{ page.categories | join: ", " }}
+            · {{ page.categories | join: ", " }}
         {% endif %}
-
     </div>
 
     {{ content }}
