@@ -88,23 +88,97 @@ main {
     margin: 15px 0 20px 25px;
 }
 
-.post code {
-    font-family: Consolas, "Courier New", monospace;
-    background: #f3f4f6;
-    padding: 3px 6px;
-    border-radius: 4px;
-    font-size: 0.95em;
-}
+/* ========================================
+   Code Blocks
+   ======================================== */
 
-.post pre {
-    background: #111827;
-    color: #f9fafb;
-    padding: 22px;
-    overflow-x: auto;
-    border-radius: 8px;
-    margin: 22px 0;
-    line-height: 1.6;
-}
+    .post code {
+        font-family: Consolas, "Courier New", monospace;
+        background: #f3f4f6;
+        padding: 3px 6px;
+        border-radius: 4px;
+        font-size: 0.95em;
+    }
+    
+    /* Wrapper around code block */
+    
+    .code-wrapper {
+        position: relative;
+        margin: 25px 0;
+    }
+    
+    /* Main code block */
+    
+    .post .code-wrapper pre {
+        background: #111827;
+        color: #f9fafb;
+        padding: 50px 22px 22px 22px;
+        margin: 0;
+        overflow-x: auto;
+        border-radius: 8px;
+        line-height: 1.6;
+        border: 1px solid #374151;
+    }
+    
+    /* Remove inline-code styling inside code blocks */
+    
+    .post .code-wrapper pre code {
+        background: transparent;
+        color: inherit;
+        padding: 0;
+        border-radius: 0;
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 14px;
+    }
+    
+    /* Copy button */
+    
+    .copy-code-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 2;
+    
+        background: #1f2937;
+        color: #e5e7eb;
+    
+        border: 1px solid #4b5563;
+        border-radius: 5px;
+    
+        padding: 5px 11px;
+    
+        font-size: 12px;
+        font-weight: 600;
+    
+        cursor: pointer;
+    }
+    
+    .copy-code-button:hover {
+        background: #374151;
+        color: white;
+    }
+    
+    /* Dark mode */
+    
+    body.dark-mode .post code {
+        background: #1f2937;
+        color: #e5e7eb;
+    }
+    
+    body.dark-mode .post .code-wrapper pre {
+        background: #020617;
+        border-color: #334155;
+    }
+    
+    body.dark-mode .copy-code-button {
+        background: #1e293b;
+        border-color: #475569;
+        color: #f8fafc;
+    }
+    
+    body.dark-mode .copy-code-button:hover {
+        background: #334155;
+    }
 
 .post pre code {
     background: transparent;
