@@ -371,13 +371,15 @@ body.dark-mode .post pre {
     margin-bottom: 15px;
 }
 
-.table-of-contents ol {
+.table-of-contents ul {
     margin: 0;
-    padding-left: 24px;
+    padding: 0;
+    list-style: none;
 }
 
 .table-of-contents li {
-    margin: 8px 0;
+    margin: 9px 0;
+    padding-left: 0;
     color: #4b5563;
 }
 
