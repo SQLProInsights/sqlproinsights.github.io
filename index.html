@@ -189,24 +189,60 @@
         @media (max-width: 768px) {
 
             nav {
+                flex-wrap: wrap;
+            }
+        
+            .menu-toggle {
+                display: block;
+            }
+        
+            .nav-links {
+                display: none;
+                width: 100%;
                 flex-direction: column;
-                gap: 15px;
+                align-items: flex-start;
+                margin-top: 15px;
             }
-
+        
+            .nav-links.active {
+                display: flex;
+            }
+        
             nav a {
-                margin: 0 8px;
+                margin: 0;
+                padding: 10px 0;
+                width: 100%;
             }
-
+        
+            .theme-toggle {
+                margin: 10px 0 0 0;
+            }
+        
             .hero h1 {
                 font-size: 36px;
             }
-
+        
             .articles {
                 grid-template-columns: 1fr;
             }
-
+        
         }
-
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: 1px solid #64748b;
+            color: white;
+            font-size: 22px;
+            padding: 5px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
         .theme-toggle {
             background: transparent;
             border: 1px solid #64748b;
@@ -462,6 +498,23 @@
         
             });
         </script>
+
+    <script>
+            const menuToggle = document.getElementById("menu-toggle");
+            const navLinks = document.getElementById("nav-links");
+        
+            menuToggle.addEventListener("click", function () {
+        
+                navLinks.classList.toggle("active");
+        
+                const isOpen = navLinks.classList.contains("active");
+        
+                menuToggle.setAttribute("aria-expanded", isOpen);
+        
+                menuToggle.textContent = isOpen ? "✕" : "☰";
+            });
+        </script>
+    
 </body>
 
 </html>
