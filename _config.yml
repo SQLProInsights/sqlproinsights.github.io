@@ -2,6 +2,19 @@ title: SQL Pro Insights
 description: Practical Technology. Real-World Solutions.
 url: "https://sqlproinsights.github.io"
 
+logo: /assets/images/favicon.svg
+
+social:
+  name: SQL Pro Insights
+  links:
+    - https://sqlproinsights.github.io/
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/images/social-preview.png
+      
 author:
   name: Pramod Kumar Singh
 
