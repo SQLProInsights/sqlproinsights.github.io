@@ -204,6 +204,48 @@
 
         }
 
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid #64748b;
+            color: white;
+            padding: 7px 11px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-left: 18px;
+        }
+        
+        body.dark-mode {
+            background: #0f172a;
+            color: #e5e7eb;
+        }
+        
+        body.dark-mode nav,
+        body.dark-mode footer {
+            background: #020617;
+        }
+        
+        body.dark-mode .card,
+        body.dark-mode .about,
+        body.dark-mode .category {
+            background: #111827;
+            color: #e5e7eb;
+        }
+        
+        body.dark-mode .card h3,
+        body.dark-mode .section-title h2,
+        body.dark-mode .about h2 {
+            color: #93c5fd;
+        }
+        
+        body.dark-mode .card p,
+        body.dark-mode .section-title p,
+        body.dark-mode .about p {
+            color: #cbd5e1;
+        }
+        
+        body.dark-mode .category {
+            color: #e5e7eb;
+        }
     </style>
 </head>
 
@@ -224,6 +266,9 @@
             <a href="/categories/">Categories</a>
             <a href="/search/">Search</a>
             <a href="#about">About</a>
+            <button id="theme-toggle" class="theme-toggle" type="button">
+                🌙
+            </button>
         </div>
 
     </nav>
@@ -380,7 +425,28 @@
         </p>
 
     </footer>
-
+        <script>
+            const themeToggle = document.getElementById("theme-toggle");
+        
+            if (localStorage.getItem("theme") === "dark") {
+                document.body.classList.add("dark-mode");
+                themeToggle.textContent = "☀️";
+            }
+        
+            themeToggle.addEventListener("click", function () {
+        
+                document.body.classList.toggle("dark-mode");
+        
+                if (document.body.classList.contains("dark-mode")) {
+                    localStorage.setItem("theme", "dark");
+                    themeToggle.textContent = "☀️";
+                } else {
+                    localStorage.setItem("theme", "light");
+                    themeToggle.textContent = "🌙";
+                }
+        
+            });
+        </script>
 </body>
 
 </html>
