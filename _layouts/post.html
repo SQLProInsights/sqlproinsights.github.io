@@ -8,8 +8,12 @@ layout: default
 
 <div class="post-meta">
     Published: {{ page.date | date: "%B %d, %Y" }}
-    ·
-    By <a href="{{ '/about/' | relative_url }}">Pramod Kumar Singh</a>
+
+    {% if page.last_modified_at %}
+        · Updated: {{ page.last_modified_at | date: "%B %d, %Y" }}
+    {% endif %}
+
+    · By <a href="{{ '/about/' | relative_url }}">Pramod Kumar Singh</a>
 
         {% if page.categories %}
             · {{ page.categories | join: ", " }}
