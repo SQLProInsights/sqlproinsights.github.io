@@ -2,6 +2,7 @@
 layout: post
 title: "YOUR ARTICLE TITLE"
 date: YYYY-MM-DD
+last_modified_at: YYYY-MM-DD
 description: "Write a clear 140-160 character summary describing exactly what the reader will learn."
 categories:
   - SQL Server
