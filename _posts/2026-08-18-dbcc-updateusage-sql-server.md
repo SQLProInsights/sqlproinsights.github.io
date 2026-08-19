@@ -461,7 +461,13 @@ Then validate again.
 - Be cautious when running it against very large production databases.
 - Validate the database again after correcting a reported problem.
 
-## Final Thoughts
+## Related Articles
+
+If you're planning a SQL Server upgrade or migration, see:
+
+- [SQL Server 2016 to SQL Server 2025 Migration: Complete Step-by-Step Guide](/blog/sql-server-2016-to-2025-migration/)
+
+- ## Final Thoughts
 
 `DBCC UPDATEUSAGE` is a useful SQL Server administration command, but it is **not something that needs to run after every backup, restore, migration, or upgrade**.
 
