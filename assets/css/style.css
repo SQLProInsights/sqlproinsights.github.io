@@ -353,74 +353,102 @@ body.dark-mode .post pre {
    ======================================== */
 
 .table-of-contents {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    border: 1px solid #dbe3ec;
+    border-left: 4px solid #2563eb;
     border-radius: 8px;
-
-    padding: 20px 25px;
-    margin: 25px 0 35px 0;
+    padding: 22px 26px;
+    margin: 30px 0 40px 0;
+    color: #1f2937;
 }
 
 .toc-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    font-size: 18px;
-    margin-bottom: 12px;
+    font-size: 19px;
+    color: #111827;
+    margin-bottom: 15px;
 }
 
 .table-of-contents ol {
     margin: 0;
-    padding-left: 25px;
+    padding-left: 24px;
 }
 
 .table-of-contents li {
-    margin: 7px 0;
+    margin: 8px 0;
+    color: #4b5563;
 }
 
 .table-of-contents a {
-    color: #2563eb;
+    color: #1d4ed8;
     text-decoration: none;
+    line-height: 1.5;
 }
 
 .table-of-contents a:hover {
+    color: #1e40af;
     text-decoration: underline;
 }
 
 .toc-toggle {
-    background: transparent;
-    border: 1px solid #cbd5e1;
+    background: #f3f4f6;
+    color: #374151;
+    border: 1px solid #d1d5db;
     border-radius: 5px;
-
-    padding: 4px 9px;
-
+    padding: 5px 10px;
     cursor: pointer;
     font-size: 12px;
 }
 
-/* Prevent heading from hiding behind navigation */
+.toc-toggle:hover {
+    background: #e5e7eb;
+}
+
+/* Heading jump position */
 
 .post h2 {
     scroll-margin-top: 90px;
 }
 
-/* Dark mode */
+
+/* ========================================
+   Table of Contents - Dark Mode
+   ======================================== */
 
 body.dark-mode .table-of-contents {
-    background: #111827;
-    border-color: #374151;
+    background: #1e293b;
+    border-color: #334155;
+    border-left-color: #60a5fa;
+    color: #e5e7eb;
+}
+
+body.dark-mode .toc-header {
+    color: #f8fafc;
+}
+
+body.dark-mode .table-of-contents li {
+    color: #cbd5e1;
 }
 
 body.dark-mode .table-of-contents a {
     color: #93c5fd;
 }
 
-body.dark-mode .toc-toggle {
-    color: #e5e7eb;
-    border-color: #4b5563;
+body.dark-mode .table-of-contents a:hover {
+    color: #bfdbfe;
 }
 
+body.dark-mode .toc-toggle {
+    background: #334155;
+    color: #f8fafc;
+    border-color: #475569;
+}
+
+body.dark-mode .toc-toggle:hover {
+    background: #475569;
+}
 /* related posts */
 .related-posts {
     margin-top: 45px;
