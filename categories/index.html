@@ -12,48 +12,109 @@ permalink: /categories/
         Explore SQL Pro Insights articles by topic.
     </p>
 
-    {% assign sorted_categories = site.categories | sort %}
+    <div class="category-directory">
 
-    {% for category in sorted_categories %}
-
-        {% assign category_name = category[0] %}
-        {% assign category_posts = category[1] %}
-
-        <section id="{{ category_name | slugify }}" style="margin-bottom: 50px;">
-
+        <div class="post-card">
             <h2>
-                {{ category_name }}
+                <a href="/categories/sql-server/">
+                    SQL Server
+                </a>
             </h2>
 
-            {% for post in category_posts %}
+            <p>
+                {{ site.categories["SQL Server"] | size }} article(s)
+            </p>
 
-                <article class="post-card">
+            <a class="read-more" href="/categories/sql-server/">
+                View SQL Server Articles →
+            </a>
+        </div>
 
-                    <h3>
-                        <a href="{{ post.url | relative_url }}">
-                            {{ post.title }}
-                        </a>
-                    </h3>
 
-                    <div class="post-meta">
-                        {{ post.date | date: "%B %d, %Y" }}
-                    </div>
+        <div class="post-card">
+            <h2>
+                <a href="/categories/database/">
+                    Database
+                </a>
+            </h2>
 
-                    <p>
-                        {{ post.excerpt | strip_html | truncatewords: 30 }}
-                    </p>
+            <p>
+                {{ site.categories["Database"] | size }} article(s)
+            </p>
 
-                    <a class="read-more"
-                       href="{{ post.url | relative_url }}">
-                        Read Article →
-                    </a>
+            <a class="read-more" href="/categories/database/">
+                View Database Articles →
+            </a>
+        </div>
 
-                </article>
 
-            {% endfor %}
+        <div class="post-card">
+            <h2>
+                <a href="/categories/performance/">
+                    Performance
+                </a>
+            </h2>
 
-        </section>
+            <p>
+                {{ site.categories["Performance"] | size }} article(s)
+            </p>
 
-    {% endfor %}
+            <a class="read-more" href="/categories/performance/">
+                View Performance Articles →
+            </a>
+        </div>
+
+
+        <div class="post-card">
+            <h2>
+                <a href="/categories/azure/">
+                    Azure
+                </a>
+            </h2>
+
+            <p>
+                {{ site.categories["Azure"] | size }} article(s)
+            </p>
+
+            <a class="read-more" href="/categories/azure/">
+                View Azure Articles →
+            </a>
+        </div>
+
+
+        <div class="post-card">
+            <h2>
+                <a href="/categories/ai/">
+                    AI
+                </a>
+            </h2>
+
+            <p>
+                {{ site.categories["AI"] | size }} article(s)
+            </p>
+
+            <a class="read-more" href="/categories/ai/">
+                View AI Articles →
+            </a>
+        </div>
+
+
+        <div class="post-card">
+            <h2>
+                <a href="/categories/automation/">
+                    Automation
+                </a>
+            </h2>
+
+            <p>
+                {{ site.categories["Automation"] | size }} article(s)
+            </p>
+
+            <a class="read-more" href="/categories/automation/">
+                View Automation Articles →
+            </a>
+        </div>
+
+    </div>
 
 </div>
