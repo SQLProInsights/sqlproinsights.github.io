@@ -2,6 +2,7 @@
 layout: post
 title: "DBCC UPDATEUSAGE in SQL Server: What It Does, When to Run It, and When Not To"
 date: 2026-08-18
+last_modified_at: 2026-08-19
 categories:
   - SQL Server
 tags:
