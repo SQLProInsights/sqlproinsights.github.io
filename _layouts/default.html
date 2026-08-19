@@ -27,44 +27,51 @@
 <body>
 
     <nav>
+    <div class="nav-container">
 
-        <div class="nav-container">
+        <a class="logo" href="{{ '/' | relative_url }}">
+            SQL Pro Insights
+        </a>
 
-            <a class="logo"
-               href="{{ '/' | relative_url }}">
-                SQL Pro Insights
+        <button
+            class="menu-toggle"
+            id="menu-toggle"
+            type="button"
+            aria-label="Toggle navigation"
+            aria-expanded="false">
+            ☰
+        </button>
+
+        <div class="nav-links" id="nav-links">
+
+            <a href="{{ '/' | relative_url }}">
+                Home
             </a>
 
-            <div class="nav-links">
+            <a href="{{ '/blog/' | relative_url }}">
+                Blog
+            </a>
 
-                <a href="{{ '/' | relative_url }}">
-                    Home
-                </a>
+            <a href="{{ '/categories/' | relative_url }}">
+                Categories
+            </a>
 
-                <a href="{{ '/blog/' | relative_url }}">
-                    Blog
-                </a>
+            <a href="{{ '/search/' | relative_url }}">
+                Search
+            </a>
 
-                <a href="{{ '/categories/' | relative_url }}">
-                    Categories
-                </a>
+            <a href="{{ '/about/' | relative_url }}">
+                About
+            </a>
 
-                <a href="{{ '/search/' | relative_url }}">
-                    Search
-                </a>
-
-                <a href="{{ '/about/' | relative_url }}">
-                    About
-                </a>
-                <button id="theme-toggle" class="theme-toggle" type="button">
-                    🌙
-                </button>
-                
-            </div>
+            <button id="theme-toggle" class="theme-toggle" type="button">
+                🌙
+            </button>
 
         </div>
 
-    </nav>
+    </div>
+</nav>
 
     <main>
         {{ content }}
