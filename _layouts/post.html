@@ -21,5 +21,45 @@ layout: default
     </div>
 
     {{ content }}
-
+        {% assign related_count = 0 %}
+        
+        {% for post in site.posts %}
+        
+            {% if post.url != page.url %}
+        
+                {% assign same_category = false %}
+        
+                {% for category in page.categories %}
+                    {% if post.categories contains category %}
+                        {% assign same_category = true %}
+                    {% endif %}
+                {% endfor %}
+        
+                {% if same_category and related_count < 3 %}
+        
+                    {% if related_count == 0 %}
+                        <section class="related-posts">
+                            <h2>Related Articles</h2>
+                            <ul>
+                    {% endif %}
+        
+                    <li>
+                        <a href="{{ post.url | relative_url }}">
+                            {{ post.title }}
+                        </a>
+                    </li>
+        
+                    {% assign related_count = related_count | plus: 1 %}
+        
+                {% endif %}
+        
+            {% endif %}
+        
+        {% endfor %}
+        
+        {% if related_count > 0 %}
+                </ul>
+            </section>
+        {% endif %}
+                    
 </article>
