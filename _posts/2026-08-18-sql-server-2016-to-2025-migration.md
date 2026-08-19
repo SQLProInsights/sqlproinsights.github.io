@@ -285,13 +285,7 @@ Check:
 
 Continue comparing performance against your pre-migration baseline.
 
-## Related Articles
-
-For more information about post-migration metadata validation, see:
-
-- [DBCC UPDATEUSAGE in SQL Server: What It Does, When to Run It, and When Not To](/blog/dbcc-updateusage-sql-server/)
-
-- ## Final Thoughts
+## Final Thoughts
 
 A SQL Server migration should be treated as a **controlled project**, not simply a backup-and-restore operation.
 
