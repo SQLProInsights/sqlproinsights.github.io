@@ -1,0 +1,115 @@
+---
+layout: default
+title: Search
+permalink: /search/
+---
+
+<div class="blog-container">
+
+    <h1>Search Articles</h1>
+
+    <p class="blog-intro">
+        Search SQL Pro Insights by title, category, tags, or article content.
+    </p>
+
+    <input
+        type="text"
+        id="search-input"
+        placeholder="Search articles..."
+        style="
+            width: 100%;
+            max-width: 700px;
+            padding: 14px;
+            font-size: 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            margin: 0 auto 30px auto;
+            display: block;
+        "
+    >
+
+    <div id="search-results"></div>
+
+</div>
+
+<script>
+
+const posts = [
+
+{% for post in site.posts %}
+{
+    title: {{ post.title | jsonify }},
+    url: {{ post.url | relative_url | jsonify }},
+    category: {{ post.categories | join: " " | jsonify }},
+    tags: {{ post.tags | join: " " | jsonify }},
+    content: {{ post.content | strip_html | strip_newlines | jsonify }}
+}{% unless forloop.last %},{% endunless %}
+{% endfor %}
+
+];
+
+const input = document.getElementById("search-input");
+const results = document.getElementById("search-results");
+
+function displayResults() {
+
+    const query = input.value.toLowerCase().trim();
+
+    results.innerHTML = "";
+
+    if (query.length < 2) {
+        return;
+    }
+
+    const filtered = posts.filter(post => {
+
+        const searchableText =
+            post.title + " " +
+            post.category + " " +
+            post.tags + " " +
+            post.content;
+
+        return searchableText.toLowerCase().includes(query);
+
+    });
+
+    if (filtered.length === 0) {
+
+        results.innerHTML =
+            "<p>No matching articles found.</p>";
+
+        return;
+    }
+
+    filtered.forEach(post => {
+
+        const card = document.createElement("article");
+
+        card.className = "post-card";
+
+        card.innerHTML = `
+            <h2>
+                <a href="${post.url}">
+                    ${post.title}
+                </a>
+            </h2>
+
+            <p>
+                Category: ${post.category || "Uncategorized"}
+            </p>
+
+            <a class="read-more"
+               href="${post.url}">
+                Read Article →
+            </a>
+        `;
+
+        results.appendChild(card);
+
+    });
+
+}
+
+input.addEventListener("input", displayResults);
+
+</script>
