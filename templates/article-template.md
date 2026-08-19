@@ -2,12 +2,13 @@
 layout: post
 title: "YOUR ARTICLE TITLE"
 date: YYYY-MM-DD
+description: "Write a clear 140-160 character summary describing exactly what the reader will learn."
 categories:
   - SQL Server
 tags:
   - SQL Server
   - Database Administration
-description: "Write a short 1-2 sentence description of the article."
+  - Troubleshooting
 ---
 
 Write a short introduction explaining:
@@ -81,6 +82,11 @@ Explain the result underneath the code.
 - Validate application dependencies.
 - Monitor after making changes.
 
+## Related Articles
+
+Continue learning with these related SQL Pro Insights articles:
+
+- [Related Article Title](/blog/related-article-url/)
 ## Final Thoughts
 
 Summarize the problem, solution, and most important recommendation.
