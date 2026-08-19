@@ -1,0 +1,52 @@
+---
+layout: default
+title: Automation
+permalink: /categories/automation/
+---
+
+<div class="blog-container">
+
+    <h1>Automation Articles</h1>
+
+    <p class="blog-intro">
+        Database automation, scripting, operational efficiency, monitoring, and administrative workflows.
+    </p>
+
+    {% assign category_posts = site.categories["Automation"] %}
+
+    {% if category_posts and category_posts.size > 0 %}
+
+        {% for post in category_posts %}
+
+            <article class="post-card">
+
+                <h2>
+                    <a href="{{ post.url | relative_url }}">
+                        {{ post.title }}
+                    </a>
+                </h2>
+
+                <div class="post-meta">
+                    {{ post.date | date: "%B %d, %Y" }}
+                </div>
+
+                <p>
+                    {{ post.excerpt | strip_html | truncatewords: 35 }}
+                </p>
+
+                <a class="read-more"
+                   href="{{ post.url | relative_url }}">
+                    Read Article →
+                </a>
+
+            </article>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No Automation articles published yet.</p>
+
+    {% endif %}
+
+</div>
