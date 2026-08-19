@@ -348,6 +348,79 @@ body.dark-mode .post pre {
     cursor: pointer;
 }
 
+/* ========================================
+   Table of Contents
+   ======================================== */
+
+.table-of-contents {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+
+    padding: 20px 25px;
+    margin: 25px 0 35px 0;
+}
+
+.toc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.table-of-contents ol {
+    margin: 0;
+    padding-left: 25px;
+}
+
+.table-of-contents li {
+    margin: 7px 0;
+}
+
+.table-of-contents a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.table-of-contents a:hover {
+    text-decoration: underline;
+}
+
+.toc-toggle {
+    background: transparent;
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+
+    padding: 4px 9px;
+
+    cursor: pointer;
+    font-size: 12px;
+}
+
+/* Prevent heading from hiding behind navigation */
+
+.post h2 {
+    scroll-margin-top: 90px;
+}
+
+/* Dark mode */
+
+body.dark-mode .table-of-contents {
+    background: #111827;
+    border-color: #374151;
+}
+
+body.dark-mode .table-of-contents a {
+    color: #93c5fd;
+}
+
+body.dark-mode .toc-toggle {
+    color: #e5e7eb;
+    border-color: #4b5563;
+}
+
 /* related posts */
 .related-posts {
     margin-top: 45px;
