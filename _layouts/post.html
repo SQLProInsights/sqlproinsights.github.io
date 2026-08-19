@@ -61,5 +61,58 @@ layout: default
                 </ul>
             </section>
         {% endif %}
+
+            <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        
+            const codeBlocks = document.querySelectorAll(".post pre");
+        
+            codeBlocks.forEach(function (block) {
+        
+                const wrapper = document.createElement("div");
+                wrapper.className = "code-wrapper";
+        
+                block.parentNode.insertBefore(wrapper, block);
+                wrapper.appendChild(block);
+        
+                const button = document.createElement("button");
+                button.className = "copy-code-button";
+                button.type = "button";
+                button.textContent = "Copy";
+        
+                wrapper.appendChild(button);
+        
+                button.addEventListener("click", async function () {
+        
+                    const code = block.querySelector("code");
+        
+                    if (!code) return;
+        
+                    try {
+        
+                        await navigator.clipboard.writeText(code.innerText);
+        
+                        button.textContent = "Copied ✓";
+        
+                        setTimeout(function () {
+                            button.textContent = "Copy";
+                        }, 2000);
+        
+                    } catch (error) {
+        
+                        button.textContent = "Copy failed";
+        
+                        setTimeout(function () {
+                            button.textContent = "Copy";
+                        }, 2000);
+        
+                    }
+        
+                });
+        
+            });
+        
+        });
+        </script>
                     
 </article>
