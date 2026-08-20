@@ -76,19 +76,28 @@ The responsibility for patching the Operating System (OS) and the SQL Server eng
 
 ### On-Premises
 In a traditional on-premises datacenter, you own the entire stack.
-#### OS Patching: Your local infrastructure or Windows server team must test, schedule, and apply Windows or Linux updates.
-#### SQL Server Patching: Your Database Administrators (DBAs) must manually download, test, and apply Cumulative Updates (CUs) and Service Packs.
-#### Downtime: You must orchestrate cluster failovers manually to avoid application downtime during updates.
+#### OS Patching: 
+Your local infrastructure or Windows server team must test, schedule, and apply Windows or Linux updates.
+#### SQL Server Patching: 
+Your Database Administrators (DBAs) must manually download, test, and apply Cumulative Updates (CUs) and Service Packs.
+#### Downtime: 
+You must orchestrate cluster failovers manually to avoid application downtime during updates.
 ### Azure Virtual Machines (IaaS)
 When you lift-and-shift SQL Server to an Azure VM, it behaves much like an on-premises server, but Azure provides helper tools.
-#### OS Patching: You are ultimately responsible. However, you can use Azure Update Manager or Automatic VM Guest Patching to schedule automated installations.
-#### SQL Server Patching: You are responsible. If you install the SQL IaaS Agent Extension, you can configure Automated Patching windows, allowing Azure to apply critical SQL updates on a schedule you choose.
-#### Downtime: You must still configure high-availability clusters (like Always On) to prevent downtime when updates force a VM reboot.
+#### OS Patching: 
+You are ultimately responsible. However, you can use Azure Update Manager or Automatic VM Guest Patching to schedule automated installations.
+#### SQL Server Patching: 
+You are responsible. If you install the SQL IaaS Agent Extension, you can configure Automated Patching windows, allowing Azure to apply critical SQL updates on a schedule you choose.
+#### Downtime: 
+You must still configure high-availability clusters (like Always On) to prevent downtime when updates force a VM reboot.
 ### Azure SQL Database & Managed Instance (PaaS)
 In the Platform-as-a-Service model, Microsoft abstracts away all underlying server infrastructure.
-#### OS Patching: Fully handled by Microsoft. You never see, access, or manage the underlying operating system.
-#### SQL Server Patching: Fully handled by Microsoft. The database engine is constantly kept up-to-date with the latest security fixes, bug patches, and features.
-#### Downtime: Patches are applied using a rolling upgrade strategy across the cluster. For Azure SQL Database, this results in a tiny connection glitch (typically under 5 seconds) handled easily by application retry logic. For Managed Instance, you can even configure a Maintenance Window to control what day/time these automated updates occur
+#### OS Patching: 
+Fully handled by Microsoft. You never see, access, or manage the underlying operating system.
+#### SQL Server Patching: 
+Fully handled by Microsoft. The database engine is constantly kept up-to-date with the latest security fixes, bug patches, and features.
+#### Downtime: 
+Patches are applied using a rolling upgrade strategy across the cluster. For Azure SQL Database, this results in a tiny connection glitch (typically under 5 seconds) handled easily by application retry logic. For Managed Instance, you can even configure a Maintenance Window to control what day/time these automated updates occur
 
 ## 7. SQL Server Agent
 
