@@ -2,7 +2,6 @@
 layout: post
 title: "Azure SQL Database vs SQL Server: Key Differences for DBAs"
 date: 2023-07-28
-last_modified_at: YYYY-MM-DD
 
 description: "Learn the key differences between Azure SQL Database and traditional SQL Server, including administration, backups, HA, patching, and DBA responsibilities."
 
@@ -133,8 +132,3 @@ You should skip Azure SQL Database and instead choose SQL Server (on-premises or
 
 Azure SQL Database reduces many infrastructure responsibilities, but it does not eliminate the need for database administration. The DBA role shifts from managing servers and operating systems toward database performance, security, reliability, automation, architecture, and cost optimization.
 
-## Related Articles
-
-Continue learning with these related SQL Pro Insights articles:
-
-- [Related Article Title](/blog/related-article-url/)
