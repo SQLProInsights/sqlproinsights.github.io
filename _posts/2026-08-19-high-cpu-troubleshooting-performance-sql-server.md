@@ -115,7 +115,7 @@ SELECT
 	CROSS APPLY sys.dm_exec_sql_text(r.sql_handle) AS t 
 	WHERE r.session_id <> @@SPID 
 	ORDER BY r.cpu_time DESC;
-
+```
 Pay particular attention to queries with:
 
  - High cpu_time
@@ -380,7 +380,7 @@ ORDER BY CacheSizeMB DESC;
 You can also check whether optimize for ad hoc workloads is enabled:
 
 ```sql
-EXEC sys.sp\\\_configure 'optimize for ad hoc workloads';
+EXEC sys.sp_configure 'optimize for ad hoc workloads';
 ```
 
 This option can be useful in environments containing large numbers of single-use ad hoc plans, but the workload should be evaluated before changing the server configuration.
@@ -410,8 +410,8 @@ ORDER BY cpu_time DESC;
 Also review SQL Server parallelism settings:
 
 ```sql
-EXEC sys.sp\\\_configure 'max degree of parallelism';
-EXEC sys.sp\\\_configure 'cost threshold for parallelism';
+EXEC sys.sp_configure 'max degree of parallelism'; 
+EXEC sys.sp_configure 'cost threshold for parallelism';
 ```
 
 Parallelism is not automatically a problem.
@@ -436,13 +436,13 @@ ORDER BY wait_time_ms DESC;
 
 For CPU troubleshooting, pay attention to:
 
-`SOS\\\_SCHEDULER\\\_YIELD`  
+`SOS_SCHEDULER_YIELD`  
 `CXPACKET`  
 `CXCONSUMER`
 
-`SOS\\\_SCHEDULER\\\_YIELD` can become significant when workers repeatedly yield the scheduler while performing CPU-intensive work.
+`SOS_SCHEDULER_YIELD` can become significant when workers repeatedly yield the scheduler while performing CPU-intensive work.
 
-However, wait statistics must be interpreted in the context of the workload. The existence of `SOS\\\_SCHEDULER\\\_YIELD` or `CXPACKET` does not by itself prove there is a CPU problem.
+However, wait statistics must be interpreted in the context of the workload. The existence of `SOS_SCHEDULER_YIELD` or `CXPACKET` does not by itself prove there is a CPU problem.
 
 ## 14. Check Scheduler Pressure
 
@@ -463,7 +463,7 @@ WHERE status = 'VISIBLE ONLINE';
 
 Pay particular attention to:
 
-`runnable\\\_tasks\\\_count`
+`runnable_tasks_count`
 
 A sustained runnable queue across multiple schedulers can indicate CPU pressure.
 
