@@ -27,11 +27,10 @@ This article provides a practical, step-by-step approach for troubleshooting hig
 Before troubleshooting SQL Server, verify that the SQL Server process is responsible for the CPU utilization.
 
 At the operating system level, check:
-
-Task Manager
-Resource Monitor
-Performance Monitor
-Process Explorer
+  - Task Manager
+  - Resource Monitor
+  - Performance Monitor
+  - Process Explorer
 
 Look for the `sqlservr.exe` process.
 
@@ -44,16 +43,41 @@ If SQL Server is consuming most of the available CPU, continue troubleshooting i
 SQL Server maintains CPU utilization information in the ring buffers.
 
 ```sql
+DECLARE @ts_now BIGINT =
+(
+    SELECT cpu_ticks / (cpu_ticks / ms_ticks)
+    FROM sys.dm_os_sys_info
+);
 
-DECLARE @ts\_now BIGINT = ( SELECT cpu\_ticks / (cpu\_ticks / ms\_ticks) FROM sys.dm\_os\_sys\_info ); SELECT TOP (30) DATEADD(ms, -1 \* (@ts\_now - \[timestamp]), GETDATE()) AS EventTime, SQLProcessUtilization AS SQLServerCPU, SystemIdle AS SystemIdleCPU, 100 - SystemIdle - SQLProcessUtilization AS OtherProcessCPU FROM ( SELECT record.value('(./Record/@id)\[1]', 'int') AS record\_id, record.value('(./Record/SchedulerMonitorEvent/SystemHealth/SystemIdle)\[1]', 'int') AS SystemIdle, record.value('(./Record/SchedulerMonitorEvent/SystemHealth/ProcessUtilization)\[1]', 'int') AS SQLProcessUtilization, \[timestamp] FROM ( SELECT \[timestamp], CONVERT(XML, record) AS record FROM sys.dm\_os\_ring\_buffers WHERE ring\_buffer\_type = N'RING\_BUFFER\_SCHEDULER\_MONITOR' AND record LIKE '%<SystemHealth>%' ) AS x ) AS y ORDER BY record\_id DESC;
+SELECT TOP (30)
+       DATEADD(ms, -1 * (@ts_now - [timestamp]), GETDATE()) AS EventTime,
+       SQLProcessUtilization AS SQLServerCPU,
+       SystemIdle AS SystemIdleCPU,
+       100 - SystemIdle - SQLProcessUtilization AS OtherProcessCPU
+FROM
+(
+    SELECT record.value('(./Record/@id)[1]', 'int') AS record_id,
+           record.value('(./Record/SchedulerMonitorEvent/SystemHealth/SystemIdle)[1]', 'int') AS SystemIdle,
+           record.value('(./Record/SchedulerMonitorEvent/SystemHealth/ProcessUtilization)[1]', 'int') AS SQLProcessUtilization,
+           [timestamp]
+    FROM
+    (
+        SELECT [timestamp],
+               CONVERT(XML, record) AS record
+        FROM sys.dm_os_ring_buffers
+        WHERE ring_buffer_type = N'RING_BUFFER_SCHEDULER_MONITOR'
+          AND record LIKE '%<SystemHealth>%'
+    ) AS x
+) AS y
+ORDER BY record_id DESC;
 
 ```
 
 This helps distinguish CPU consumption between:
 
-SQL Server
-Other processes
-Idle CPU
+- SQL Server
+- Other processes
+- Idle CPU
 
 ## 3. Find Queries Currently Consuming CPU
 
@@ -61,7 +85,7 @@ If the CPU problem is happening right now, identify active requests consuming CP
 
 ```sql
 
-SELECT r.session\_id, r.status, r.cpu\_time, r.total\_elapsed\_time, r.logical\_reads, r.reads, r.writes, r.wait\_type, r.wait\_time, DB\_NAME(r.database\_id) AS DatabaseName, s.host\_name, s.program\_name, s.login\_name, SUBSTRING( t.text, (r.statement\_start\_offset / 2) + 1, ( ( CASE r.statement\_end\_offset WHEN -1 THEN DATALENGTH(t.text) ELSE r.statement\_end\_offset END - r.statement\_start\_offset ) / 2 ) + 1 ) AS RunningStatement FROM sys.dm\_exec\_requests AS r INNER JOIN sys.dm\_exec\_sessions AS s ON r.session\_id = s.session\_id CROSS APPLY sys.dm\_exec\_sql\_text(r.sql\_handle) AS t WHERE r.session\_id <> @@SPID ORDER BY r.cpu\_time DESC;
+SELECT r.session\\\_id, r.status, r.cpu\\\_time, r.total\\\_elapsed\\\_time, r.logical\\\_reads, r.reads, r.writes, r.wait\\\_type, r.wait\\\_time, DB\\\_NAME(r.database\\\_id) AS DatabaseName, s.host\\\_name, s.program\\\_name, s.login\\\_name, SUBSTRING( t.text, (r.statement\\\_start\\\_offset / 2) + 1, ( ( CASE r.statement\\\_end\\\_offset WHEN -1 THEN DATALENGTH(t.text) ELSE r.statement\\\_end\\\_offset END - r.statement\\\_start\\\_offset ) / 2 ) + 1 ) AS RunningStatement FROM sys.dm\\\_exec\\\_requests AS r INNER JOIN sys.dm\\\_exec\\\_sessions AS s ON r.session\\\_id = s.session\\\_id CROSS APPLY sys.dm\\\_exec\\\_sql\\\_text(r.sql\\\_handle) AS t WHERE r.session\\\_id <> @@SPID ORDER BY r.cpu\\\_time DESC;
 
 ```
 
@@ -81,10 +105,10 @@ Sometimes the CPU spike has already passed. In that case, query the plan cache t
 
 ```sql
 
-SELECT TOP (20) qs.total\_worker\_time / 1000.0 AS TotalCPU\_ms, qs.execution\_count, (qs.total\_worker\_time / NULLIF(qs.execution\_count, 0)) / 1000.0 AS AvgCPU\_ms, qs.total\_elapsed\_time / 1000.0 AS TotalElapsed\_ms, qs.total\_logical\_reads, qs.last\_execution\_time, DB\_NAME(st.dbid) AS DatabaseName, SUBSTRING( st.text, (qs.statement\_start\_offset / 2) + 1, ( ( CASE qs.statement\_end\_offset WHEN -1 THEN DATALENGTH(st.text) ELSE qs.statement\_end\_offset END - qs.statement\_start\_offset ) / 2 ) + 1 ) AS QueryText, qp.query\_plan FROM sys.dm\_exec\_query\_stats AS qs CROSS APPLY sys.dm\_exec\_sql\_text(qs.sql\_handle) AS st CROSS APPLY sys.dm\_exec\_query\_plan(qs.plan\_handle) AS qp ORDER BY qs.total\_worker\_time DESC;
+SELECT TOP (20) qs.total\\\_worker\\\_time / 1000.0 AS TotalCPU\\\_ms, qs.execution\\\_count, (qs.total\\\_worker\\\_time / NULLIF(qs.execution\\\_count, 0)) / 1000.0 AS AvgCPU\\\_ms, qs.total\\\_elapsed\\\_time / 1000.0 AS TotalElapsed\\\_ms, qs.total\\\_logical\\\_reads, qs.last\\\_execution\\\_time, DB\\\_NAME(st.dbid) AS DatabaseName, SUBSTRING( st.text, (qs.statement\\\_start\\\_offset / 2) + 1, ( ( CASE qs.statement\\\_end\\\_offset WHEN -1 THEN DATALENGTH(st.text) ELSE qs.statement\\\_end\\\_offset END - qs.statement\\\_start\\\_offset ) / 2 ) + 1 ) AS QueryText, qp.query\\\_plan FROM sys.dm\\\_exec\\\_query\\\_stats AS qs CROSS APPLY sys.dm\\\_exec\\\_sql\\\_text(qs.sql\\\_handle) AS st CROSS APPLY sys.dm\\\_exec\\\_query\\\_plan(qs.plan\\\_handle) AS qp ORDER BY qs.total\\\_worker\\\_time DESC;
 
 ```
-`total\_worker\_time` represents CPU time consumed by the query.
+`total\\\_worker\\\_time` represents CPU time consumed by the query.
 
 Do not look only at total CPU. Also compare:
 
@@ -108,9 +132,9 @@ First check whether Query Store is enabled:
 
 SELECT
 
-&#x20;   name,
+\&#x20;   name,
 
-&#x20;   is\_query\_store\_on
+\&#x20;   is\\\_query\\\_store\\\_on
 
 FROM sys.databases;
 
@@ -119,9 +143,9 @@ You can also review the configuration:
 
 ```sql
 
-SELECT \*
+SELECT \\\*
 
-FROM sys.database\_query\_store\_options;
+FROM sys.database\\\_query\\\_store\\\_options;
 
 ```
 Query Store can help identify:
@@ -181,39 +205,39 @@ You can review missing-index DMVs:
 
 SELECT TOP (20)
 
-&#x20;   DB\_NAME(mid.database\_id) AS DatabaseName,
+\&#x20;   DB\\\_NAME(mid.database\\\_id) AS DatabaseName,
 
-&#x20;   OBJECT\_NAME(mid.object\_id, mid.database\_id) AS TableName,
+\&#x20;   OBJECT\\\_NAME(mid.object\\\_id, mid.database\\\_id) AS TableName,
 
-&#x20;   migs.user\_seeks,
+\&#x20;   migs.user\\\_seeks,
 
-&#x20;   migs.avg\_total\_user\_cost,
+\&#x20;   migs.avg\\\_total\\\_user\\\_cost,
 
-&#x20;   migs.avg\_user\_impact,
+\&#x20;   migs.avg\\\_user\\\_impact,
 
-&#x20;   mid.equality\_columns,
+\&#x20;   mid.equality\\\_columns,
 
-&#x20;   mid.inequality\_columns,
+\&#x20;   mid.inequality\\\_columns,
 
-&#x20;   mid.included\_columns
+\&#x20;   mid.included\\\_columns
 
-FROM sys.dm\_db\_missing\_index\_group\_stats AS migs
+FROM sys.dm\\\_db\\\_missing\\\_index\\\_group\\\_stats AS migs
 
-INNER JOIN sys.dm\_db\_missing\_index\_groups AS mig
+INNER JOIN sys.dm\\\_db\\\_missing\\\_index\\\_groups AS mig
 
-&#x20;   ON migs.group\_handle = mig.index\_group\_handle
+\&#x20;   ON migs.group\\\_handle = mig.index\\\_group\\\_handle
 
-INNER JOIN sys.dm\_db\_missing\_index\_details AS mid
+INNER JOIN sys.dm\\\_db\\\_missing\\\_index\\\_details AS mid
 
-&#x20;   ON mig.index\_handle = mid.index\_handle
+\&#x20;   ON mig.index\\\_handle = mid.index\\\_handle
 
 ORDER BY
 
-&#x20;   migs.avg\_total\_user\_cost \*
+\&#x20;   migs.avg\\\_total\\\_user\\\_cost \\\*
 
-&#x20;   migs.avg\_user\_impact \*
+\&#x20;   migs.avg\\\_user\\\_impact \\\*
 
-&#x20;   (migs.user\_seeks + migs.user\_scans) DESC;
+\&#x20;   (migs.user\\\_seeks + migs.user\\\_scans) DESC;
 
 ```
 ## Important
@@ -241,15 +265,15 @@ Check statistics for a table:
 
 SELECT
 
-&#x20;   OBJECT\_NAME(s.object\_id) AS TableName,
+\&#x20;   OBJECT\\\_NAME(s.object\\\_id) AS TableName,
 
-&#x20;   s.name AS StatisticsName,
+\&#x20;   s.name AS StatisticsName,
 
-&#x20;   STATS\_DATE(s.object\_id, s.stats\_id) AS StatisticsLastUpdated
+\&#x20;   STATS\\\_DATE(s.object\\\_id, s.stats\\\_id) AS StatisticsLastUpdated
 
 FROM sys.stats AS s
 
-WHERE s.object\_id = OBJECT\_ID('dbo.YourTable')
+WHERE s.object\\\_id = OBJECT\\\_ID('dbo.YourTable')
 
 ORDER BY StatisticsLastUpdated;
 
@@ -339,21 +363,21 @@ Check the plan cache:
 
 SELECT
 
-&#x20;   objtype,
+\&#x20;   objtype,
 
-&#x20;   cacheobjtype,
+\&#x20;   cacheobjtype,
 
-&#x20;   COUNT(\*) AS PlanCount,
+\&#x20;   COUNT(\\\*) AS PlanCount,
 
-&#x20;   SUM(CAST(size\_in\_bytes AS BIGINT)) / 1024.0 / 1024.0 AS CacheSizeMB
+\&#x20;   SUM(CAST(size\\\_in\\\_bytes AS BIGINT)) / 1024.0 / 1024.0 AS CacheSizeMB
 
-FROM sys.dm\_exec\_cached\_plans
+FROM sys.dm\\\_exec\\\_cached\\\_plans
 
 GROUP BY
 
-&#x20;   objtype,
+\&#x20;   objtype,
 
-&#x20;   cacheobjtype
+\&#x20;   cacheobjtype
 
 ORDER BY CacheSizeMB DESC;
 
@@ -367,7 +391,7 @@ You can also check whether optimize for ad hoc workloads is enabled:
 
 ```sql
 
-EXEC sys.sp\_configure 'optimize for ad hoc workloads';
+EXEC sys.sp\\\_configure 'optimize for ad hoc workloads';
 
 ```
 
@@ -383,29 +407,29 @@ Check current parallel requests:
 
 SELECT
 
-&#x20;   session\_id,
+\&#x20;   session\\\_id,
 
-&#x20;   request\_id,
+\&#x20;   request\\\_id,
 
-&#x20;   status,
+\&#x20;   status,
 
-&#x20;   command,
+\&#x20;   command,
 
-&#x20;   cpu\_time,
+\&#x20;   cpu\\\_time,
 
-&#x20;   total\_elapsed\_time,
+\&#x20;   total\\\_elapsed\\\_time,
 
-&#x20;   wait\_type,
+\&#x20;   wait\\\_type,
 
-&#x20;   dop,
+\&#x20;   dop,
 
-&#x20;   parallel\_worker\_count
+\&#x20;   parallel\\\_worker\\\_count
 
-FROM sys.dm\_exec\_requests
+FROM sys.dm\\\_exec\\\_requests
 
 WHERE dop > 1
 
-ORDER BY cpu\_time DESC;
+ORDER BY cpu\\\_time DESC;
 
 ```
 
@@ -413,9 +437,9 @@ Also review SQL Server parallelism settings:
 
 ```sql
 
-EXEC sys.sp\_configure 'max degree of parallelism';
+EXEC sys.sp\\\_configure 'max degree of parallelism';
 
-EXEC sys.sp\_configure 'cost threshold for parallelism';
+EXEC sys.sp\\\_configure 'cost threshold for parallelism';
 
 ```
 
@@ -431,33 +455,33 @@ Wait statistics provide another perspective on what SQL Server is experiencing.
 
 SELECT TOP (30)
 
-&#x20;   wait\_type,
+\&#x20;   wait\\\_type,
 
-&#x20;   waiting\_tasks\_count,
+\&#x20;   waiting\\\_tasks\\\_count,
 
-&#x20;   wait\_time\_ms,
+\&#x20;   wait\\\_time\\\_ms,
 
-&#x20;   signal\_wait\_time\_ms,
+\&#x20;   signal\\\_wait\\\_time\\\_ms,
 
-&#x20;   wait\_time\_ms - signal\_wait\_time\_ms AS resource\_wait\_time\_ms
+\&#x20;   wait\\\_time\\\_ms - signal\\\_wait\\\_time\\\_ms AS resource\\\_wait\\\_time\\\_ms
 
-FROM sys.dm\_os\_wait\_stats
+FROM sys.dm\\\_os\\\_wait\\\_stats
 
-WHERE wait\_type NOT LIKE 'SLEEP%'
+WHERE wait\\\_type NOT LIKE 'SLEEP%'
 
-ORDER BY wait\_time\_ms DESC;
+ORDER BY wait\\\_time\\\_ms DESC;
 
 ```
 
 For CPU troubleshooting, pay attention to:
 
-`SOS\_SCHEDULER\_YIELD`
+`SOS\\\_SCHEDULER\\\_YIELD`
 `CXPACKET`
 `CXCONSUMER`
 
-`SOS\_SCHEDULER\_YIELD` can become significant when workers repeatedly yield the scheduler while performing CPU-intensive work.
+`SOS\\\_SCHEDULER\\\_YIELD` can become significant when workers repeatedly yield the scheduler while performing CPU-intensive work.
 
-However, wait statistics must be interpreted in the context of the workload. The existence of `SOS\_SCHEDULER\_YIELD` or `CXPACKET` does not by itself prove there is a CPU problem.
+However, wait statistics must be interpreted in the context of the workload. The existence of `SOS\\\_SCHEDULER\\\_YIELD` or `CXPACKET` does not by itself prove there is a CPU problem.
 
 ## 14. Check Scheduler Pressure
 
@@ -467,23 +491,23 @@ SQL Server scheduler information can help determine whether runnable tasks are w
 
 SELECT
 
-&#x20;   scheduler\_id,
+\&#x20;   scheduler\\\_id,
 
-&#x20;   cpu\_id,
+\&#x20;   cpu\\\_id,
 
-&#x20;   status,
+\&#x20;   status,
 
-&#x20;   current\_tasks\_count,
+\&#x20;   current\\\_tasks\\\_count,
 
-&#x20;   runnable\_tasks\_count,
+\&#x20;   runnable\\\_tasks\\\_count,
 
-&#x20;   active\_workers\_count,
+\&#x20;   active\\\_workers\\\_count,
 
-&#x20;   work\_queue\_count,
+\&#x20;   work\\\_queue\\\_count,
 
-&#x20;   pending\_disk\_io\_count
+\&#x20;   pending\\\_disk\\\_io\\\_count
 
-FROM sys.dm\_os\_schedulers
+FROM sys.dm\\\_os\\\_schedulers
 
 WHERE status = 'VISIBLE ONLINE';
 
@@ -491,7 +515,7 @@ WHERE status = 'VISIBLE ONLINE';
 
 Pay particular attention to:
 
-`runnable\_tasks\_count`
+`runnable\\\_tasks\\\_count`
 
 A sustained runnable queue across multiple schedulers can indicate CPU pressure.
 
@@ -515,7 +539,7 @@ instead of a searchable range predicate such as:
 
 WHERE OrderDate >= '20260820'
 
-&#x20; AND OrderDate <  '20260821'
+\&#x20; AND OrderDate <  '20260821'
 
 ```
 
@@ -673,11 +697,11 @@ The query is:
 
 SELECT
 
-&#x20;   OrderID,
+\&#x20;   OrderID,
 
-&#x20;   CustomerID,
+\&#x20;   CustomerID,
 
-&#x20;   OrderDate
+\&#x20;   OrderDate
 
 FROM dbo.Orders
 
@@ -691,7 +715,7 @@ After workload analysis, an appropriate index might be:
 
 ```sql
 
-CREATE INDEX IX\_Orders\_CustomerID
+CREATE INDEX IX\\\_Orders\\\_CustomerID
 
 ON dbo.Orders (CustomerID)
 
