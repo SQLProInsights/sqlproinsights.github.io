@@ -54,8 +54,11 @@ layout: default
                 {% if same_category and related_count < 3 %}
         
                     {% if related_count == 0 %}
-                        <section class="related-posts">
-                            <h2>Related Articles</h2>
+                    <section class="related-posts" aria-labelledby="related-articles-title">
+                        <h2 id="related-articles-title">Related Articles</h2>
+                        <p class="related-intro">
+                            More articles from SQL Pro Insights on related topics:
+                        </p>
                             <ul>
                     {% endif %}
         
