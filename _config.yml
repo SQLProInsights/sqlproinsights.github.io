@@ -6,15 +6,16 @@ logo: /assets/images/favicon.svg
 
 social:
   name: SQL Pro Insights
-  links:
-    - https://sqlproinsights.github.io/
 
 defaults:
   - scope:
       path: ""
+      type: "posts"
     values:
+      layout: "post"
+      author: "Pramod Kumar Singh"
       image: /assets/images/social-preview.png
-      
+
 author:
   name: Pramod Kumar Singh
 
@@ -28,5 +29,6 @@ plugins:
 markdown: kramdown
 
 permalink: /blog/:title/
+
 exclude:
   - templates
