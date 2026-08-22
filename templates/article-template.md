@@ -1,11 +1,12 @@
 ---
-layout: post
-title: "YOUR ARTICLE TITLE"
+title: "ARTICLE TITLE HERE"
+description: "Write a unique 140–160 character summary that clearly explains what the reader will learn."
 date: YYYY-MM-DD
-last_modified_at: YYYY-MM-DD
-description: "Write a clear 140-160 character summary describing exactly what the reader will learn."
+# last_modified_at: YYYY-MM-DD
+
 categories:
   - SQL Server
+
 tags:
   - SQL Server
   - Database Administration
