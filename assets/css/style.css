@@ -310,6 +310,14 @@ body.dark-mode .post pre {
     background: #1e293b;
 }
 
+.related-intro {
+    margin-bottom: 15px;
+    color: #6b7280;
+}
+
+body.dark-mode .related-intro {
+    color: #cbd5e1;
+}
 
 /* Mobile */
 
