@@ -66,7 +66,7 @@ Automatic registration also works when SQL Server runs under:
  - A domain admin account
  - A domain account explicitly granted SPN write permissions
 
-    ### Caution: Granting SPN write permissions is not recommended for clustered SQL Servers or environments with multiple domain controllers, because AD replication latency can cause intermittent connectivity issues.
+#### Caution: Granting SPN write permissions is not recommended for clustered SQL Servers or environments with multiple domain controllers, because AD replication latency can cause intermittent connectivity issues.
 
 ### Option 2 — Manual SPN Registration
 Manual registration uses the Microsoft setspn utility. You must be a domain admin or have delegated rights to manage SPNs.
