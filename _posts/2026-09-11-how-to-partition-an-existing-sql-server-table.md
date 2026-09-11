@@ -1,13 +1,17 @@
 ---
-
 layout: post
 title: "How to Partition an Existing SQL Server Table"
 date: 2026-09-11
-categories: [SQL Server]
-tags: [SQL Server, Partitioning, Performance Tuning, DBA]
+categories:
+  - SQL Server
+tags:
+  - SQL Server
+  - Partitioning
+  - Performance Tuning
+  - DBA
 description: "Learn how to partition an existing SQL Server table step by step using partition functions, partition schemes, filegroups, data migration, validation, and partition elimination."
 image: /assets/images/sql-server-partitioning/partitioning-architecture.png
----------------------------------------------------------------------------
+---
 
 # How to Partition an Existing SQL Server Table
 
