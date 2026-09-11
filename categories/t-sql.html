@@ -1,0 +1,54 @@
+---
+layout: default
+title: T-SQL
+permalink: /categories/t-sql/
+---
+
+<div class="blog-container">
+
+    <h1>T-SQL Articles</h1>
+
+    <p class="blog-intro">
+        Practical T-SQL scripts, troubleshooting queries, administration utilities, and reusable SQL Server code for DBAs and developers.
+    </p>
+
+    {% assign tsql_posts = site.categories["T-SQL"] %}
+
+    {% if tsql_posts %}
+
+        {% for post in tsql_posts %}
+
+            <article class="post-card">
+
+                <h2>
+                    <a href="{{ post.url | relative_url }}">
+                        {{ post.title }}
+                    </a>
+                </h2>
+
+                <div class="post-meta">
+                    {{ post.date | date: "%B %d, %Y" }}
+                </div>
+
+                {% if post.excerpt %}
+                    <p>
+                        {{ post.excerpt | strip_html | truncatewords: 35 }}
+                    </p>
+                {% endif %}
+
+                <a class="read-more"
+                   href="{{ post.url | relative_url }}">
+                    Read Article →
+                </a>
+
+            </article>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No T-SQL articles published yet.</p>
+
+    {% endif %}
+
+</div>
