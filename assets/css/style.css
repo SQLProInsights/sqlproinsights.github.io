@@ -529,3 +529,34 @@ body.dark-mode .related-posts {
     }
 
 }
+
+/* ==================================================
+   Blog Article Images
+   ================================================== */
+
+.post-content img {
+  display: block;
+  width: 90%;
+  max-width: 900px;
+  height: auto;
+  margin: 28px auto 12px;
+  border-radius: 6px;
+}
+
+/* Image captions */
+.post-content img + em {
+  display: block;
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 28px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Responsive images for tablets and phones */
+@media (max-width: 900px) {
+  .post-content img {
+    width: 100%;
+    max-width: 100%;
+  }
+}
