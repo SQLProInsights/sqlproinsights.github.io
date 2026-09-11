@@ -174,11 +174,13 @@ BlockedSessionID   BlockingSessionID   WaitType       WaitTimeMS
 85                 72                  LCK_M_S        12677
 ```
 This indicates the following blocking chain:
+```text
 51
  ↓
 72
  ↓
 85
+```
 Session `51` is therefore the likely head blocker.
 
 ### Find the Blocking Session Details
