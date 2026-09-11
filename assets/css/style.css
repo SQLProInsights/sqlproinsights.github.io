@@ -534,17 +534,24 @@ body.dark-mode .related-posts {
    Blog Article Images
    ================================================== */
 
-.post-content img {
+/* Resize images inside blog/article content */
+article img,
+.post img,
+.post-content img,
+main img {
   display: block;
-  width: 90%;
-  max-width: 900px;
+  width: auto;
+  max-width: 800px;
   height: auto;
   margin: 28px auto 12px;
   border-radius: 6px;
 }
 
-/* Image captions */
-.post-content img + em {
+/* Captions */
+article img + em,
+.post img + em,
+.post-content img + em,
+main img + em {
   display: block;
   text-align: center;
   margin-top: 8px;
@@ -553,9 +560,12 @@ body.dark-mode .related-posts {
   color: #666;
 }
 
-/* Responsive images for tablets and phones */
-@media (max-width: 900px) {
-  .post-content img {
+/* Mobile */
+@media (max-width: 850px) {
+  article img,
+  .post img,
+  .post-content img,
+  main img {
     width: 100%;
     max-width: 100%;
   }
