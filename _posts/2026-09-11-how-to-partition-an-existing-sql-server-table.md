@@ -395,6 +395,17 @@ FG_2026
 ```
 
 ---
+> **Alternative: Partition the Existing Table In Place**
+>
+> Creating a new partitioned table and migrating the data is not the only
+> approach. An existing table with a clustered index can also be moved onto
+> a partition scheme by rebuilding or recreating the clustered index on the
+> partition scheme.
+>
+> The migration method demonstrated below is useful because it provides a
+> separate destination table that can be validated before the final cutover.
+> For some environments, however, repartitioning the existing clustered index
+> may be a better option.
 
 ## 7. Create the New Partitioned Table
 
