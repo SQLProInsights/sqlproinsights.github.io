@@ -395,6 +395,7 @@ FG_2026
 ```
 
 ---
+
 > **Alternative: Partition the Existing Table In Place**
 >
 > Creating a new partitioned table and migrating the data is not the only
