@@ -151,6 +151,7 @@ GO
 ### Understanding the Output
 
 The most useful columns are:
+```text
 | Column              | Description                           |
 | ------------------- | ------------------------------------- |
 | `BlockedSessionID`  | Session currently waiting             |
@@ -164,13 +165,14 @@ The most useful columns are:
 | `WaitResource`      | Resource the request is waiting for   |
 | `CurrentStatement`  | Statement currently executing         |
 | `FullBatchText`     | Complete submitted SQL batch          |
-
+```
 For example:
+```text
 BlockedSessionID   BlockingSessionID   WaitType       WaitTimeMS
 ----------------   -----------------   ------------   ----------
 72                 51                  LCK_M_X        18542
 85                 72                  LCK_M_S        12677
-
+```
 This indicates the following blocking chain:
 51
  ↓
