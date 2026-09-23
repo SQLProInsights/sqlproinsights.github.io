@@ -1,11 +1,15 @@
 ---
 layout: post
-title: "SQL Server Always On Availability Groups Interview Preparation: Complete HA and DR Guide"
-date: 2026-09-23
-categories: [SQL Server]
-tags: [SQL Server, Always On, Availability Groups, HA, DR, DBA, Interview, SQL Server 2025]
-description: "A practical 21-day SQL Server Always On Availability Groups interview preparation guide covering HA, DR, architecture, failover, synchronization, monitoring, troubleshooting, Distributed AGs, and SQL Server 2025."
-permalink: /blog/sql-server-always-on-ag-interview-preparation/
+title: "SQL Server AlwaysOn Availability Group Interview Questions"
+date: 2024-05-23
+categories:
+  - SQL Server
+tags:
+  - SQL Server
+  - Performance Tuning
+  - DBA
+  - Database
+description: "SQL Server AlwaysOn Availability Group Interview Questions."
 ---
 
 # SQL Server Always On Availability Groups Interview Preparation
