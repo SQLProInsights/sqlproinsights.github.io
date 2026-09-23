@@ -55,26 +55,21 @@ The goal is not simply to memorize interview questions. You should be able to ex
 
 By the end of this preparation plan, you should be comfortable discussing these areas:
 
-```text
 | Area | Interview expectation |
 |---|---|
 | AG Fundamentals | Explain architecture and terminology clearly |
-| HA vs DR | Explain how AGs support availability and disaster recovery |
-| Configuration | Describe how to build and configure an AG |
-| Synchronization | Explain synchronous and asynchronous data movement |
-| Failover | Explain automatic, planned, and forced failover |
-| Monitoring | Use SSMS, DMVs, logs, and cluster information |
-| Troubleshooting | Diagnose unhealthy or unsynchronized databases |
-| Performance | Investigate send queues, redo queues, I/O, CPU, and network issues |
-| DR | Explain RPO, RTO, site failure, and recovery procedures |
-| SQL Server 2025 | Discuss relevant AG and Distributed AG changes |
-```
+| HA vs DR | Explain how AGs provide both and their limitations |
+| Configuration | Build an AG from scratch |
+| Synchronization | Explain synchronous/asynchronous data movement |
+| Failover | Explain automatic, planned and forced failover |
+| Troubleshooting | Diagnose unhealthy/suspended/not synchronizing databases |
+| Performance | Diagnose latency, redo/send queues and network issues |
+| SQL Server 2025 | Explain relevant new AG capabilities |
+
 The interview should be approached as a **production DBA problem-solving exercise**, not just a definition quiz.
 
----
-
 # 21-Day Preparation Roadmap
-```text
+
 | Day | Focus | Priority |
 |---|---|---|
 | 1 | AG architecture and terminology | High |
@@ -98,9 +93,6 @@ The interview should be approached as a **production DBA problem-solving exercis
 | 19 | DR scenario | High |
 | 20 | Mock interview | High |
 | 21 | Rapid-fire review | High |
-```
----
-
 
 **SQL Pro Insights**
 *Practical Technology. Real-World Solutions.*
