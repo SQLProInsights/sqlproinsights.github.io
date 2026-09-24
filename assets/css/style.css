@@ -530,6 +530,30 @@ body.dark-mode .related-posts {
 
 }
 
+/* Markdown Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  display: table;
+}
+
+table th,
+table td {
+  padding: 12px 10px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid #ddd;
+}
+
+table th {
+  font-weight: 700;
+}
+
+table tr:last-child td {
+  border-bottom: none;
+}
+
 /* ==================================================
    Blog Article Images
    ================================================== */
