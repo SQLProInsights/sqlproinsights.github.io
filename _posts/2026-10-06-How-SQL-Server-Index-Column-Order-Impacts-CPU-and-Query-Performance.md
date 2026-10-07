@@ -488,9 +488,9 @@ Create a simple test table to record your observations:
 Test   Index                                Logical Reads	        Sort?	        Key Lookup?
 ----   -----                                -------------	        -----	        -----------
 1	No nonclustered index                 Record                Record        Record          
-2	(OrderDate, CustomerID)               Record		        Record	  Record
-3	(CustomerID, OrderDate)               Record		        Record	  Record
-4	(CustomerID, OrderDate) + INCLUDE     Record		        Record	  Record     
+2	(OrderDate, CustomerID)               Record		        Record	      Record
+3	(CustomerID, OrderDate)               Record		        Record	      Record
+4	(CustomerID, OrderDate) + INCLUDE     Record		        Record	      Record     
 ```
 
 Your numbers will depend on your environment.
