@@ -225,7 +225,7 @@ Start-Process `
 ```
 The important concept here is that SQL Server Setup becomes part of our automation pipeline instead of requiring an administrator to click through the installation wizard.
 
-## Understanding the Important Setup Parameters
+### Understanding the Important Setup Parameters
 
 Some of the most useful parameters include:
 ```text
