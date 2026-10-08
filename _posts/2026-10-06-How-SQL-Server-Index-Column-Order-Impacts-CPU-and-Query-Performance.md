@@ -842,4 +842,7 @@ Before creating or changing an index, ask:
 ☐ Did I measure before and after?
 ☐ Did I test with realistic workload/concurrency?
 ```
+---
 
+**SQL Pro Insights**
+*Practical Technology. Real-World Solutions.*
